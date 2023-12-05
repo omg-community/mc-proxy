@@ -1,7 +1,7 @@
 package games.omg.regularproxy;
 
 import com.velocitypowered.api.event.Subscribe;
-import com.velocitypowered.api.event.connection.LoginEvent;
+import com.velocitypowered.api.event.player.ServerPreConnectEvent;
 import com.velocitypowered.api.proxy.Player;
 
 import dev.simplix.protocolize.api.Location;
@@ -11,9 +11,10 @@ import dev.simplix.protocolize.data.packets.PlayerPosition;
 public class Authorize {
 
   @Subscribe
-  public void onServerConnect(LoginEvent event) {
+  public void onServerPreConnect(ServerPreConnectEvent event) {
     Player player = event.getPlayer();
     
+    event.setResult(ServerPreConnectEvent.ServerResult.denied());
     sendToVoid(player);
   }
 
